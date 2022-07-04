@@ -1,0 +1,25 @@
+<!-- EXTEND2. input태그 실습 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type='text' value="초기값" id="inpText"
+    placeholder="아이디를 입력하세요"
+    autofocus/>
+    <input type='button' id="inpBtn"
+     value="아이디 찾기"
+     onclick="onclickBtn()"/>
+    <script>
+        function onclickBtn(){
+            var selected_id = document.getElementById('inpText');
+            console.log(selected_id).value;
+        }
+    </script>
+
+</body>
+</html>
