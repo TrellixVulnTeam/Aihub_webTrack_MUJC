@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+    </title>
+  </head>
+  <body>
+    <ul>
+        <li id="finput">1.0</li>
+        <li id="dInput">5</li>
+        <input id='inBtn' type="button" value='누르면 더함'/>
+        <p id="p">'결과'</p>
+    </ul>
+  </body>
+  <script>
+
+    function plusLi() {
+        var fInput = document.getElementById('fInput').innerHTML
+        var dInput = document.getElementById('dInput').innerHTML
+
+        var result = document.getElementById('p')
+        result.innerHTML = Number(fInput) + Number(dInput)
+    }
+    
+    var inBtn = document.getElementById('inBtn')
+    inBtn.addEventListener('click',plusLi)
+</script>
+</html>
