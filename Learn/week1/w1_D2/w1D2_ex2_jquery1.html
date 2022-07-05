@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="./jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <input type="button" id="btn" value="클릭" />
+</body>
+<script>
+    $(document).ready(function () { //windows.onload()와 같은 역할
+        $("input[id='btn']").click(function () {  //TAG명[id='타겟값'] 으로 타겟 지정
+            alert("반갑습니다!");
+        });
+    });
+</script>
+
+</html>

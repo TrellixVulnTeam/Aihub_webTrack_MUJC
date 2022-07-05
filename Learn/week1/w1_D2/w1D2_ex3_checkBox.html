@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    <p>Menu</p>
+    <ul>
+        <li>치킨<input name="meal" type="checkbox"/></li>
+        <li>피자<input name="meal" type="checkbox"/></li>
+        <li>족발<input name="meal" type="checkbox"/></li>
+    </ul>
+    <button onclick="show()">결과보기</button><br>
+    결과값:<div id="results"></div>
+</body>
+<script type="text/javascript">
+    function show() {
+        var str = '';
+        var arr = document.querySelectorAll("input[name='menu']");
+        // var arr = $("input[name='meal']");
+        // var arr = document.querySelectorAll("input[name='meal']")
+        
+        for (var i = 0; i < arr.length; i++){
+            var c = arr[i];
+            if (c.checked) {
+                str += c.value + '<br>';
+                //치킨 <br/> 피자 <br/>
+            }
+        }
+        document.getElementById('results').innerHTML = "<h1>" + str + "</h1>"; 
+    }
+</script> 
+    
+
+</html>
