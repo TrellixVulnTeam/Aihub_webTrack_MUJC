@@ -1,0 +1,33 @@
+<!-- 0 미만으로 내려가지 않는 INPUT -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id='in'/>
+    <input id='plus' type="button" value ='+'
+        onclick=onclickp/>
+    <input id='minus' type="button" value= '-'
+        onclick=onclickp/>
+
+    <script>
+        document.getElementById('plus').addEventListener('click', () => {
+            var n = Number(document.getElementById('in').value)
+            document.getElementById('in').value = ++n})
+
+        document.getElementById('minus').addEventListener('click', () => {
+            var n = Number(document.getElementById('in').value)
+            if (n <= 0) return false
+            else document.getElementById('in').value = --n
+        })
+    </script>
+</body>
+</html>
+
+<script>
+
+</script>

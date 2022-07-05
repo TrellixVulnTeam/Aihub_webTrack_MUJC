@@ -1,0 +1,29 @@
+<!-- EXTEND4. Onchange 실습 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span>함수형</span>
+    <input type="text" id = 'id1' onchange="getText1()">
+    <p id ='getTextId1'></p>
+    <hr>
+    <span>이벤트리스너</span>
+    <input type="text" id ='id2'>
+    <p id='getTextId2'></p>    
+</body>
+<script>
+    function getText1() {
+        var getId = document.getElementById('getTextId1').innerHTML = getId;
+    }
+
+    //이벤트 리스너
+    document.getElementById('id').addEventListener('change', function () {
+
+    })
+</script>
+</html>
