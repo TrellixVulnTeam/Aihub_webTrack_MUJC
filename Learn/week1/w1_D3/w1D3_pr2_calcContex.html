@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Context App</title>
+  </head>
+  <body>
+    <div id="root">
+      <main>
+        <h2>Context App</h2>
+
+        <div class="app">
+          <input id="number" type="number" name="number" placeholder="숫자를 입력하세요.">
+          <div>
+            <button id="mul-button">곱셈 연산하기</button>
+          </div>
+
+          <div>
+            <button id="add-button">덧셈 연산하기</button>
+          </div>
+
+          <div id="result"></div>
+        </div>
+      </main>
+    </div>
+
+      <script src="./index.js"></script>
+  </body>
+
+
+  <!-- <script>
+    //Context.js 메인 Calculating 연산들
+    function mul(num) {
+        let a = 10;
+        let b = 20;
+        function mul30(num) {
+          return num*a*b; // 이 부분을 수정하세요.
+        }
+        return mul30(num);
+      }
+      
+      function add30(num) {
+        let a = 10;
+        return (function () {
+          let b = 20;
+          function add() {
+            return num+a+b; // 이 부분을 수정하세요.
+          }
+      
+          return add();
+        })();
+      }
+      
+      const myModule = { mul, add30 };
+      
+      export default myModule;      
+  </script> -->
+
+
+  <!-- <script>
+    //App.js : 리액트부
+    import "./app.css";
+    import Context from "./Context";
+
+    const App = () => {
+    const input = document.getElementById("number");
+    const mulButton = document.getElementById("mul-button");
+    const addButton = document.getElementById("add-button");
+    const result = document.getElementById("result");
+
+    mulButton.addEventListener("click", () => {
+        result.innerHTML = Context.mul(Number(input.value));
+    });
+
+    addButton.addEventListener("click", () => {
+        result.innerHTML = Context.add30(Number(input.value));
+    });
+    };
+
+    export default App;
+
+  </script> -->
+
+  
+</html>

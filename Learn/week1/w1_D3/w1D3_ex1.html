@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let o = {
+        name:'Daniel',
+        f1:()=>{        // (1) 화살표 함수의 this는 자신이 아니라 자기 상위의 객체를 가리킴
+            console.log("[f1] this : ",this.name);
+        },
+        f2:function (){
+            console.log("[f2] this : ",this.name);
+        }
+    }
+    o.f1(); // this.name 부분에서 공백 출력     :  (1)의 규칙에 따라 f1의 this는 자신(객체 o)의 상위 객체인 window를 가리킴
+    o.f2(); // this.name 부분에서 Daniel 출력 
+</script>
+</html>
