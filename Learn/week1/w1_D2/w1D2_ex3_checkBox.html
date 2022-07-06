@@ -15,15 +15,15 @@
 </body>
 <script type="text/javascript">
     function show() {
+        var arr = document.querySelectorAll("input[name='meal']");
         var str = '';
-        var arr = document.querySelectorAll("input[name='menu']");
         // var arr = $("input[name='meal']");
         // var arr = document.querySelectorAll("input[name='meal']")
         
         for (var i = 0; i < arr.length; i++){
-            var c = arr[i];
-            if (c.checked) {
-                str += c.value + '<br>';
+            var el = arr[i];
+            if (el.checked) {
+                str += el.value + '<br>';
                 //치킨 <br/> 피자 <br/>
             }
         }

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>NameRepeater App</title>
+  </head>
+  <body>
+    <div id="root">
+      <main>
+        <h2>NameRepeater App</h2>
+
+        <div class="app">
+          <input id="name" type="text" name="name" placeholder="이름을 입력하세요.">
+          <div>
+            <button id="set-button">이름 설정</button>
+          </div>
+
+          <div>
+            <button id="repeat-button">이름 반복</button>
+          </div>
+
+          <div id="result"></div>
+        </div>
+      </main>
+    </div>
+
+      <script>
+        const NameRepeater = {
+            name: "My Name",
+            setName: function setName(name) {
+              // NameRepeater의 이름을 세팅합니다.
+              
+              return this.name = name ; //App.js에서 NameRepeater를 import하여 반환값을 활용하기 때문에 return시켜주는 것
+            },
+            repeatName: function repeatName(num) {
+              // NameRepeater의 이름을 num 만큼 반복해 리턴합니다.
+              return this.name.repeat(num); //String.prototype.repeat(count) 메서드
+            },
+          };
+          
+          export default NameRepeater;
+          
+      </script>
+      <!-- <script>
+        // REACT 파일 'App.js'
+        import "./app.css";
+        import NameRepeater from "./NameRepeater";
+
+        const App = () => {
+        const input = document.getElementById("name");
+        const setButton = document.getElementById("set-button");
+        const repeatButton = document.getElementById("repeat-button");
+        const result = document.getElementById("result");
+        let cnt = 2;    //기본  설정된 반복 횟수
+
+        setButton.addEventListener("click", () => {
+            NameRepeater.setName(input.value);
+            result.innerHTML = "설정되었습니다.";
+        });
+
+        repeatButton.addEventListener("click", () => {
+            const resultString = NameRepeater.repeatName(cnt);
+            cnt++;  // 버튼 클릭 시 마다 반복횟수 1씩 추가함
+            result.innerHTML = resultString;
+        });
+        };
+
+        export default App;
+
+      </script>  -->
+  </body>
+</html>
