@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    
+    let ab1 = function () {
+        console.log(this)
+    }
+// (1) this가 어떻게 동작하는가 실습
+        // 해당 객체는 바인딩 된 부분이 없기 때문에 window가 출력됨    
+    ab1(); 
+    
+// (2) 바인딩되어 number 출력
+    let result = ab1.bind(1);
+    result();
+
+// (3) 화살표 함수는 상위객체 window 지칭
+    let ab2 = () => {
+        console.log(this);
+    }
+    ab2();
+
+// (4)  바인딩 되지 않아 window지칭
+    function abc() {
+        console.log(this);
+    }    
+    abc(); 
+
+// (5) 
+    // o1 일반 함수의 this는 자신 객체인 o를 지칭
+    // o2 화살표 함수의 this는 자신객체를 감싸는 상위객체인 window를 가리킴
+    // o3 일반함수의 this는 자신객체 o를 지칭, 
+    // o4는 o3 일반함수 내부에 존재하기 때문에 o4의 this는, 자신을 가진 객체인 o3의 한단계 밖인 o를 가리킴
+    let o = {
+        o1: function (){
+            console.log(this);
+        },
+        o2: () => {
+            console.log(this);
+            let o3 = () => {
+                console.log(this);
+            }
+            o3();
+        },
+        o3: function (){
+            console.log(this);
+            let o4 = () => {
+                console.log(this);
+                o4();
+            }
+        }
+    }
+    o.o1();
+    o.o2();
+    o.o3();
+    o.o4();
+</script>
+</html>

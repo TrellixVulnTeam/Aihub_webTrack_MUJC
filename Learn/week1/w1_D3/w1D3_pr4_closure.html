@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //Counter 자체가 함수임
+const Counter = () => {
+    // Counter 클로저를 작성하세요.
+
+    var count = 0; // (1) 해당 변수는 클로저 내부에 존재하므로, Counter함수가 리턴되어 종료되어도 메모리에 남아있게 된다.
+    
+    //(2) getCount함수를 클로저에 추가, 현재 count값 반환하는 함수
+    function getCount() { 
+        return count
+    };
+    
+    //(3) increase함수를 클로저에 추가
+    function increase() {
+        count++;
+    }
+    //(4) decrease 함수를 클로저에 추가
+    function decrease() {
+        count--;
+    }
+    
+    // Counter 함수가, 클로저들을 객체로 묶어서 반환토록 함
+    return {getCount,increase,decrease,count}
+};
+
+export default Counter;
+</script>
+</html>
