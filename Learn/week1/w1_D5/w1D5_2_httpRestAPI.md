@@ -100,58 +100,6 @@ result
 
 <br><br>
 
-<1. fetch API는 프로미스 반환>
-
-```js
-let result = fetch(serverURL)
-
-result
-    .then(response => {
-        if ( response ok ) {
-            // 요청 성공
-        }
-    })
-    .catch(error =>{
-    //요청 실패
-        })
-```
-
-<br><br>
-
-<1. fetch API는 프로미스 반환>
-
-```js
-let result = fetch(serverURL)
-
-result
-    .then(response => {
-        if ( response ok ) {
-            // 요청 성공
-        }
-    })
-    .catch(error =>{
-    //요청 실패
-        })
-```
-
-<br><br>
-
-<1. fetch API는 프로미스 반환>
-
-```js
-let result = fetch(serverURL)
-
-result
-    .then(response => {
-        if ( response ok ) {
-            // 요청 성공
-        }
-    })
-    .catch(error =>{
-    //요청 실패
-        })
-```
-
 
 
 
