@@ -12,7 +12,7 @@ js는 JAVA와 다르게 메인 스레드를 단일의 스레드로 가지고 있
 ```
 JS엔진은 비동기 처리를 제공하지 않는다(기본적으론 동기처리)
 대신 비동기 코드는 정해진 함수를 제공해 활용 ( 비동기 API )
-    - 비동기 API의 예시로, setImeout,XMLHttpRequres, fetch 등의 web API가 있음.
+    - 비동기 API의 예시로, setTimeout,XMLHttpRequest, fetch 등의 web API가 있음.
     - node.js의 경우 파일 처리 API, 암호화 API 등을 제공
 ```
 
