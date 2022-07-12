@@ -38,10 +38,78 @@ import API from "./api";
 
 const requestPosts = () => {
   // 데이터를 적절하게 조합하여 Post 정보를 만들어보세요.
-  return new Promise((resolve) => resolve([]));
+  return Promise.all([API.fetchPosts(), API.fetchUsers()])  // Promise.all() 메서드는 복수의 Promise가 담긴 배열을 인자로 받아, 그 resolve값들을 배열로 반환(모두 성공 시)
+    .then(([posts, users]) => {
+      return fetchCommentsByPosts(posts).then((comments) => [
+        posts,
+        users,
+        comments,
+      ]);
+    })
+    .then(([posts, users, comments]) => {
+      const userMap = createUserMap(users);
+      const commentMap = createCommentMap(comments);
+      return transformPosts(posts, userMap, commentMap);
+    });
 };
 
 export default requestPosts;
+
+function fetchCommentsByPosts(posts) {
+  return Promise.all(posts.map((post) => API.fetchComments(post.id))).then(
+    (commentArrays) => {
+      console.log(commentArrays);
+      console.log(commentArrays.flatMap((array) => array));
+      return commentArrays.flatMap((array) => array);
+    }
+  );
+}
+  //사용자정의
+function createUserMap(users) {
+  return users.reduce((map, user) => {
+    map[user.id] = user;
+    return map;
+  }, {});
+}
+  //사용자정의
+function createCommentMap(comments) {
+  return comments.reduce((map, comment) => {
+    const array = map[comment.postId] ? map[comment.postId] : [];
+    array.push(comment);
+    map[comment.postId] = array;
+    return map;
+  }, {});
+}
+  //사용자정의
+function transformPosts(posts, userMap, commentMap) {
+  return posts.map((post) => {
+    const { id, userId, ...rest } = post;
+    return {
+      ...rest,
+      user: userMap[userId],
+      comments: commentMap[id],
+    };
+  });
+}
+// export default requestPosts;
+
+
+
+// ////// api.js
+// const API_URL = "https://jsonplaceholder.typicode.com";
+
+// const fetchPosts = () =>
+//   fetch(`${API_URL}/posts`).then((response) => response.json());
+
+// const fetchUsers = () =>
+//   fetch(`${API_URL}/users`).then((response) => response.json());
+
+// const fetchComments = (postId) =>
+//   fetch(`${API_URL}/posts/${postId}/comments`).then((response) =>
+//     response.json()
+//   );
+
+// export default { fetchPosts, fetchUsers, fetchComments };
 
 ////// apiMock.js
 const testPostData = [

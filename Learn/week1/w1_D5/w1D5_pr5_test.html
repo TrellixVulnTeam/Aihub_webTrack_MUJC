@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+////// api.js
+const API_URL = "https://jsonplaceholder.typicode.com";
+
+const fetchPosts = () =>
+fetch(`${API_URL}/posts`).then((response) => response.json());
+
+const fetchUsers = () =>
+fetch(`${API_URL}/users`).then((response) => response.json());
+
+const fetchComments = (postId) =>
+fetch(`${API_URL}/posts/${postId}/comments`).then((response) =>
+    response.json()
+);
+
+
+//////
+const requestPosts = () => {
+    return fetchPosts()
+};
+let res = 0
+res = requestPosts().then((posts) => {
+    let resPosts = []
+    resPosts = posts.map((post) => {
+        return post.userId
+    })
+    //console.log(resPosts)
+    return resPosts
+})
+
+ress = res.then((resolve) => { return console.log(resolve) })
+console.log(typeof ress)
+
+</script>
+</html>
+
+
+    
+
+    
+
+    
+
+
+
