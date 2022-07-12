@@ -20,8 +20,9 @@ const UserInput = () => {
 
   // 지시사항을 참고하여 searchAddress() 함수를 구현하세요.
   function searchAddress() {
-    error = "";
     
+    error = "";
+
     return findUserByUsername(value)
       .then((user) => {
         console.log(user);
@@ -31,9 +32,9 @@ const UserInput = () => {
         console.log(address);
         return address;
       })
-      .catch(e => {console.log(e)})
-      
-
+      .catch((e) => {
+        error = e.message;
+      });
   }
 
   return { getError, getValue, setValue, searchAddress };

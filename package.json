@@ -1,0 +1,19 @@
+{ 
+  "name": "prac",
+  "version": "1.0.0",
+  "description": "<img src='img.png' width=450>\r <br><br>\r 2022 SUMMER AI양재허브 교육에 참여하며 학습 및 자율실습을 진행하는 과정을 담는 레포입니다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ABizCho/Aihub_webTrack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ABizCho/Aihub_webTrack/issues"
+  },
+  "homepage": "https://github.com/ABizCho/Aihub_webTrack#readme"
+}
