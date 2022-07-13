@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+// 메인 코드 : index.js
+// const countDown = require('./countdown');
+
+countDown(5, () => {
+    console.log("BOOM!")
+});
+
+
+////// countdown.js
+// 카운트다운 함수 정의 : count 숫자와, callback함수를 인자로 받는다.
+function countDown(count, callback) {   
+    console.log(count);
+    
+    if (count === 0) {
+        callback();
+        return;
+    }
+    
+    setTimeout(() => {
+        
+        countDown(count - 1, callback);
+        
+    }, 1000);
+}
+
+// module.exports = countDown;
+</script>
+</html>
