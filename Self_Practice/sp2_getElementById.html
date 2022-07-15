@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선택자로 스타일,내용 제어</title>
+    <style>
+        h1 { 
+            text-align: center;
+            color: red
+        }
+
+        #problem-list1 {
+            color: green;
+        }
+
+        div .li2 li {
+            color: blue;
+        }
+
+        .change-color-li {
+            color: brown;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>css selector로 선택자, 내용 제어 연습</h1> 
+    <ul id="problem-list1" class="linked-ul">
+        <li class="issue12">이슈1</li>
+        <li class="issue12">이슈2</li>
+        <li class="issue34">이슈3</li>
+        <li class="issue34">이슈4</li>
+    </ul>
+    <div id="li2-wrapper">
+        <ul class="li2 linked-ul">
+            <li>연결이슈1</li>
+            <li>연결이슈2</li>
+            <li>연결이슈3</li>
+        </ul>
+        <ul class="li2 independent-ul">
+            <li>독립이슈1</li>
+            <li>독립이슈2</li>
+            <li>독립이슈3</li>
+        </ul>
+    </div>
+    
+</body>
+<script>
+   let li2_linked_arr = document.querySelectorAll('#li2-wrapper .linked-ul li')
+
+   for (let i=0; i<2; i++) {
+    li2_linked_arr[i].style.color = 'purple';
+   }
+
+   let linked_ul = document.getElementsByClassName('linked-ul')
+   
+   for (let i=0; i < linked_ul.length; i++) {
+        console.log(linked_ul[i])
+        linked_ul[i].className = 'change-color-li'
+    }
+
+</script>
+
+</html>

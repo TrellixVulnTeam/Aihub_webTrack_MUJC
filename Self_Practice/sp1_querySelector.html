@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toy 1: 선택자 연습</title>
+    <style>
+        body {background-color: antiquewhite;}
+    </style>
+</head>
+<body>
+    <div id="head-title" class="body-content" >
+        <h1>Toy1: querySelector 선택자 연습</h1>
+    </div>
+    <div id="main-content" class="body-content">
+    </div>
+</body>
+<script>
+// REF1 : HTML 동적 태그 추가 : https://ludeno-studying.tistory.com/82
+
+// 1. querySelectorAll은 요소 노드들이 담긴 배열로 반환
+let tagSelector = document.querySelectorAll('div') //태그 선택자
+console.log(tagSelector)
+
+
+let idSelector = document.querySelectorAll('#main-content') //id 선택자
+console.log(idSelector)
+
+// 2. 다중 선택자
+    //1. 쉼표로 구분 시 OR연산
+let multiSelector = document.querySelectorAll('#head-title, h1')
+console.log(multiSelector[0].textContent)
+console.log(multiSelector[1].textContent)
+
+    //2. 공백으로 구분시 and연산 -> 순서대로 따라 내려가며 자식 선택
+let childSelector = document.querySelector('#head-title h1')
+childSelector.style.color = 'red'
+console.log(childSelector)
+// 2. 
+
+</script>
+</html>

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= title
+  p 어서오세요 #{title} 예제의 index페이지 입니다.
+  p 해당 페이지는 routes파일 쪽에서 res.render()메서드의 인자로 매칭되는 파일입니다. 
+    div index.js, jade 확장자 파일로 pug 문법을 사용해 작성됩니다.
+    div 퍼그는 닫는태그가 없는 대신 들여쓰기로 영역을 구분하여 이를 엄격히 준수해야 합니다.
+  div
+    ul ul: 리스트 연습
+      li 리스트1
+      li 리스트2
+      li 리스트3
+  p 이런식으로 말이죠
+  br
+  br
+  div 사이트 인덱스입니다.
+    ul 사이트 인덱스
+      li index : 해당 페이지입니다. 루트경로로 접근합니다.
+      li users : users 정보가 담긴 페이지 입니다.
+      li example1 : routes 파일에서 res.send() 방식을 사용해 응답하는 페이지 입니다.
+      li example2 : routes 파일에서 res.render() 방식을 사용해 응답하는 페이지 입니다.
+      li error : 에러 발생 시 라우팅되는 페이지 입니다. app.js의 error handler에서 에러 발생시 라우팅됩니다.
+

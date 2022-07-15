@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h2= title
+  p 이 페이지는 views 디렉토리의 '#{title}.jade' 파일을
+  p app.js 파일에서 "routes 디렉토리의 '#{title}.js'" 파일과 함께 import하여 라우팅 되어
+  p /routes/example2.js 가 받아 렌더링 하여 보여지는 jade 로 작성된 페이지 입니다.
