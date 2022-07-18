@@ -44,13 +44,17 @@ async function findItem() {
 
 //5. id를 통해 아이템 접근 및 수정 (id값은 mongoDB COMPASS로부터 확인하여 사용)
 async function changeItem() {
-  return await Post.updateOne({
-    id: "62d4e74161734762e9b144d8",
-    content: "changeItem을 통해 변경된 내용입니다.",
-  });
+  return await Post.findByIdAndUpdate(
+    {
+      _id: "62d501288550f5cddeb0a45a",
+    },
+    {
+      content: "findByIdAndUpdate를 통해 변경된 내용입니다.",
+    }
+  );
 }
 changeItem().then((res) => {
-  if (res === undefined)
+  if ((res === undefined) | null)
     console.log(
       "[UPDATE 실패] : id에 맞는 item이 컬렉션에 존재하지 않습니다. "
     );
