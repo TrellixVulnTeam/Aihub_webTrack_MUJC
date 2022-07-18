@@ -4,6 +4,7 @@ const app = express();
 const routerNotes = require("./routes/notes");
 
 app.use(express.json()); // 해당 코드로, 어떤 url이든 json() 메서드를 통과해 json형식으로 처리될 것임
+//// +) express 4.16.0버전 이후에는 bodyParser의 기능 일부가 express에 포함되었기 때문에 위 코드처럼 사용해도 된다.
 
 // 2.view engine
 // notes url에 notes라우터를 연결
