@@ -1,0 +1,81 @@
+$(document).ready(() => {
+  getList();
+});
+
+const getList = () => {
+  $(".postsList").empty(); // 기존 postList 클래스 내부안\에 있는 html 태그들 전부 삭제(비워줌)
+
+  //게시글 리스트 : 1번
+  //list.html이 실행 되어 준비가 되는 순간 익명함수가 실행되어,
+  //하단의 ajax가 실행됩니다.
+  $.ajax({
+    type: "GET",
+    url: "http://localhost:8080/posts/",
+    success: (res) => {
+      console.log(res);
+      //게시글 리스트 : 3번
+      //응답받은 json 형태의 data를 배열이므로 map 함수를,
+      //사용하여 listData에 html태그를 담습니다.
+      res.map((it, index) => {
+        let listData = `<tr>
+                <th scope="row">${index + 1}</th>
+                    <td>${it.title}</td>
+                    <td>elice</td>
+                    <td>
+                        <button type="button" 
+                            onclick= "deletePost( '${it.shortId}' )" 
+                            lass="btn btn-outline-danger">
+                            delete
+                        </button>
+                        <button onclick="updatePost( '${it.shortId}' )" 
+                          type="button" class="btn btn-outline-warning">
+                          update
+                        </button>
+                    </td>
+                </tr>`;
+        //listData에 데이터를 담아준 후, postsList라는 클래스에
+        //append를 해줍니다.
+        $(".postsList").append(listData);
+      });
+    },
+  });
+};
+
+// 이벤트핸들러 구현단
+/////// < DELETE 이벤트핸들러 >
+const deletePost = (shortId) => {
+  //shortId로 식별해 삭제하기
+  console.log(shortId);
+  $.ajax({
+    type: "GET",
+    url: `http://localhost:8080/posts/${shortId}/delete`,
+    success: (res) => {
+      alert(res.result);
+      getList();
+    },
+  });
+};
+
+///// : title로 삭제하기
+// const deletePost = (title) => { // title로 삭제하기 위해선 상단의 listData에 담긴 삭제버튼태그의 onclick에 넣을 인자값도 it.title로 변경해줘야함
+
+//   console.log(title);
+//   $.ajax({
+//     type: "GET", // schemas/posts.js의 router.get
+//     url: `http://localhost:8080/posts/${title}/delete`,
+//     success: (res) => {
+//       alert(res.result);
+//       getList();
+//     },
+//   });
+// };
+
+/////// < UPDATE 이벤트핸들러 => 'postUpdate.js'파일로  >
+
+const updatePost = (shortId) => {
+  console.log(shortId);
+
+  window.localStorage.setItem("shortId", shortId); // window브라우저 안에 shortId를 임시 저장해둠 (!=세션)
+
+  location.href = "/view/posts/updateEdit.html"; // updateEdit라는 html view로 이동
+};
