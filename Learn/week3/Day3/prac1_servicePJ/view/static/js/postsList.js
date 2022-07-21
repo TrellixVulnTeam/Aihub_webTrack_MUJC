@@ -49,6 +49,7 @@ const deletePost = (shortId) => {
   $.ajax({
     type: "GET",
     url: `http://localhost:8080/posts/${shortId}/delete`,
+    // routes의 delete 라우팅부분 참조. router.get으로 연결됨
     success: (res) => {
       alert(res.result);
       getList();
@@ -75,7 +76,7 @@ const deletePost = (shortId) => {
 const updatePost = (shortId) => {
   console.log(shortId);
 
-  window.localStorage.setItem("shortId", shortId); // window브라우저 안에 shortId를 임시 저장해둠 (!=세션)
+  window.localStorage.setItem("shortId", shortId); // window브라우저 안에 shortId를 임시 저장해둠 (!=세션) 
 
   location.href = "/view/posts/updateEdit.html"; // updateEdit라는 html view로 이동
 };

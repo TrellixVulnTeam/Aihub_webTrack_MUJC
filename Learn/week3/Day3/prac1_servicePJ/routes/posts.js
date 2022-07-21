@@ -75,9 +75,9 @@ router.get("/:shortId/find", async (req, res, next) => {
   let { shortId } = req.params;
 
   try {
-    let data = await Post.findOne({ shortId });
+    let data = await Post.findOne({ shortId }); //params로 받은 shortId를 식별자로 몽고DB의 document데이터 식별하여 가져오기
 
-    res.json(data);
+    res.json(data); //json형태로 바꿔서 다시 요청을 보낸 posts/find로 'res'를 응답보냄
   } catch (e) {
     next(e);
   }
@@ -106,4 +106,6 @@ router.post("/:shortId/update", async (req, res, next) => {
     next(e);
   }
 });
+
+
 module.exports = router;

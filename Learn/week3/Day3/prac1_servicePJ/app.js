@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const postsRouter = require("./routes/posts");
+const usersRouter = require("./routes/user");
+
 const cors = require("cors"); // cross-origin resource sharing ( 교차출처 리소스 공유 ) 미들웨어
 const bodyParser = require("body-parser");
 
@@ -22,10 +24,17 @@ mongoose.connection.on("error", (err) => {
 });
 
 //app(express 객체=서버)
-app.use(cors());
+//아래는 전역경로에 cors 등의 외부 라이브러리로 설치한 미들웨어를 부착해주는 것. default로 전역경로를 잡기 때문에 받게될 모든 url에 각 미들웨어들의 기능을  수행함
+app.use("", cors()); //이렇게 특정 경로를 붙이면, 특정 경로에만 미들웨어 기능을 수행함.
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+////// 경로 라우팅
+// posts url 경로 라우팅
 app.use("/posts", postsRouter);
+
+// users url 경로 라우팅
+app.use("/user", usersRouter);
 
 // 서버 실행
 app.listen(8080, () => {

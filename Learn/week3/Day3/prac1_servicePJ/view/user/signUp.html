@@ -18,7 +18,7 @@
 
 <body>
     <div class="container">
-        <form>
+        <form id="signUpForm">
             <div class="mb-3">
                 <label for="email" class="form-label">이메일</label>
                 <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
@@ -35,10 +35,10 @@
                 <label for="name" class="form-label">이름</label>
                 <input type="text" class="form-control" name="name" id="name" >
             </div>
-            <button type="submit" class="btn btn-primary">회원가입</button>
+            <button type="button" onclick="signUp()" class="btn btn-primary">회원가입</button>
           </form>
     </div>
 </body>
 <script src="./../static/js/header.js"></script>
-
+<script src="./../static/js/signUp.js"></script>
 </html>
