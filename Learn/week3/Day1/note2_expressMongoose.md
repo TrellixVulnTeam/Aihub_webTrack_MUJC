@@ -13,3 +13,6 @@ app 객체는 어플리케이션 시작을 의미하는 부분으로, 해당 부
 &nbsp;&nbsp;&nbsp;&nbsp;ㄴ`schemas`<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ`...` : mongoose.Schema 정의 
 
+<img src="./KakaoTalk_20220721_153852240.jpg" />
+
+<img src="./KakaoTalk_20220721_153852240_01.jpg" />

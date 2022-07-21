@@ -36,6 +36,7 @@ $(document).ready(() => {
 </header>`;
 
   let status = $.cookie("accessToken");
+  //   let userEmail = $.cookie("email");
 
   if (status) {
     $(".container").prepend(yesHeader);
