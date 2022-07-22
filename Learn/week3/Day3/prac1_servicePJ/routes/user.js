@@ -4,6 +4,7 @@ const crypto = require("crypto");
 const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const jwtConfig = require("../config/jwtConfig");
+const nodeMailer = require("nodemailer");
 
 const router = Router();
 
@@ -56,7 +57,13 @@ router.post(
 
     //DB의 User모델의 컬렉션에서, email을 식별자로 일치하는 document 찾아 받기
     const checkEmail = await User.findOne({ email });
-
+    if (checkEmail.status !== null || checkEmail.status !== undefined) {
+      if (checkEmail.status == true) {
+        console.log(
+          "비밀번호 초기화 했던 이력이 있으니, 비밀번호만 재설정하는 페이지로 Redirect"
+        );
+      }
+    }
     //email 가입 유효성 검사
     if (!checkEmail) {
       res.status(401); // 응답으로 반환할 status 설정 : 401에러(접근불가/인증실패)
@@ -109,8 +116,59 @@ router.post(
     );
   })
 );
+
+// 클라의 find요청에 라우팅되는 응답로직
+router.post(
+  "/find/password",
+  asyncHandler(async (req, res, next) => {
+    let { email } = req.body;
+    let user = await User.findOne({ email });
+    let myEmail = "he1236@ajou.ac.kr";
+
+    let transporter = nodeMailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: myEmail,
+        pass: "azsatessybsajzmn",
+      },
+    });
+
+    const randomPassword = randomPw();
+    const hashRandomPassword = passwordHash(randomPassword);
+
+    await User.findOneAndUpdate(
+      { shortId: user.shortId },
+      {
+        password: hashRandomPassword,
+      }
+    );
+
+    let info = await transporter.sendMail({
+      from: `"성우니티" <${myEmail}>`,
+      to: user.email,
+      subject: "Reset Password by 성우니티",
+      html: `<b>초기화 비밀번호 : ${randomPassword}</b>`,
+    });
+    console.log(info.messageId);
+
+    res.json({ result: "이메일을 전송했습니다." });
+  })
+);
+
+const randomPw = () => {
+  console.log("[debug]: randomPw");
+
+  return Math.floor(Math.random() * 10 ** 8)
+    .toString()
+    .padStart("0", 8); //난수 생성 메서드
+};
+
 //비밀번호 해쉬화 함수 작성
 const passwordHash = (password) => {
+  console.log("[debug]: passwordHash");
   const sha1 = crypto.createHash("sha1");
   return sha1.update(password).digest("hex");
 };

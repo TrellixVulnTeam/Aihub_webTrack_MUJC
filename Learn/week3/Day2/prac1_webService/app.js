@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 //1. DB 연결
-mongoose.connect("mongodb://localhost:27017/myapp");
+mongoose.connect("mongodb://localhost:27017/selfprac");
 
 //  연결관리 : 성공
 mongoose.connection.on("connected", () => {

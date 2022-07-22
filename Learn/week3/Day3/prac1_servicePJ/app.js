@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const postsRouter = require("./routes/posts");
 const usersRouter = require("./routes/user");
+const authMiddleware = require("./utils/authMiddleware");
 
 const cors = require("cors"); // cross-origin resource sharing ( 교차출처 리소스 공유 ) 미들웨어
 const bodyParser = require("body-parser");
@@ -31,10 +32,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 ////// 경로 라우팅
 // posts url 경로 라우팅
-app.use("/posts", postsRouter);
+app.use("/posts/", authMiddleware, postsRouter); // authMiddleware를 먼저 거치고 postsRouter로 라우팅됨
 
 // users url 경로 라우팅
-app.use("/user", usersRouter);
+app.use("/user", usersRouter); // authMiddleware를 먼저 거치고 postsRouter로 라우팅됨
 
 // 서버 실행
 app.listen(8080, () => {

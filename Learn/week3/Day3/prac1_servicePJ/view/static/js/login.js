@@ -27,8 +27,10 @@ const logIn = () => {
     success: (res) => {
       console.log(res);
 
-      // 쿠키에 jwt - accessToken 저장
+      // 브라우저의 쿠키저장소에 jwt - accessToken 저장
       $.cookie("accessToken", res.accessToken, { expires: 1, path: "/" }); //cookie("키",값),path: '/':전역으로 쿠키 접근가능 설정
+
+      // 브라우저 세션 스토리지에 유저 email,name저장
       sessionStorage.setItem("email", res.email);
       sessionStorage.setItem("name", res.name);
 

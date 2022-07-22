@@ -1,0 +1,19 @@
+{
+  "name": "week3_pracweb",
+  "version": "0.0.1",
+  "description": "AI 양재허브 3주차 강의 실습을 복습 및 참고하며, Express와 Mongoose를 이용해 MVC 패턴을 적용한 간단한 나만의 웹서비스를 만들고 연습해봅니다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.6",
+    "nanoid": "3.3.4",
+    "nodemon": "^2.0.19"
+  }
+}

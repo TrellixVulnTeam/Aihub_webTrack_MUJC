@@ -8,7 +8,12 @@ $(document).ready(() => {
   $.ajax({
     type: "GET", //GET요청
     url: `http://localhost:8080/posts/${shortId}/find`, // (id/find)로 특정 id관련 데이터 조회하고싶다.
-    success: (res) => { // 조회 성공 시 라우터에 있는 로직 처리 후 응답받은 response값으로 아래 로직 처리
+    headers: {
+      //헤더에 요청정보를 담고 싶을때 사용
+      accessToken: $.cookie("accessToken"), //쿠키에 저장해둔 accessToken을 담아 보냄
+    },
+    success: (res) => {
+      // 조회 성공 시 라우터에 있는 로직 처리 후 응답받은 response값으로 아래 로직 처리
       console.log(res);
       $("#title").val(res.title); // id가 title인 태그의 값에 가져온 shortId에 매칭된 데이터의 title값을 넣겠다.
       $("#content").val(res.content); // content id의 태그에 값을 넣겠다.
@@ -35,10 +40,15 @@ const updatePost = () => {
   // ?name=name&age=1  => 쿼리스트링
 
   //게시글 작성 : 1번
-  $.ajax({      //ajax : browser가 server에 요청
+  $.ajax({
+    //ajax : browser가 server에 요청
     type: "POST",
     url: `http://localhost:8080/posts/${shortId}/update`, //서버의 라우터로 요청보내기 , 동작은 ( /routes/posts.js -> router.post("/:shortId/update") 에서 요청url 인식하여 하게됨
     data: formData,
+    headers: {
+      //헤더에 요청정보를 담고 싶을때 사용
+      accessToken: $.cookie("accessToken"), //쿠키에 저장해둔 accessToken을 담아 보냄
+    },
     success: (res) => {
       //게시글 작성 3번
       //json 형태로 응답을 받아 res.result를 통해 data를 받습니다.

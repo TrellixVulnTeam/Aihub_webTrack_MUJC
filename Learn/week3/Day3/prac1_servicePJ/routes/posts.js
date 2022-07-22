@@ -1,5 +1,7 @@
 const { Router } = require("express");
 const { Post } = require("./../models/");
+const { User } = require("./../models/");
+
 const asyncHandler = require("../utils/async-handler");
 const router = Router();
 
@@ -7,14 +9,16 @@ const router = Router();
 //게시글이 작성되면 post형식의
 // '/posts/' 에 해당하는 url이 라우팅되어 접근
 router.post("/", async (req, res, next) => {
-  const { title, content } = req.body;
+  const { title, content, email } = req.body;
   //formData에서 req.body를 통해 들어온 title, content를 가져옴
   try {
+    const authData = await User.findOne({ email });
     //Post에 해당하는 스키마에 create 함수를 실행하고,
     //title과 content를 넣음.
     await Post.create({
       title,
       content,
+      author: authData,
     });
 
     //에러가 나지 않고 정상적으로 저장이 되면
@@ -32,7 +36,7 @@ router.post("/", async (req, res, next) => {
 //게시글 리스트를 가져오기 위해 '/posts/'를 get방식으로 라우팅 되어 접근하게 됩니다.
 router.get("/", async (req, res, next) => {
   //Post스키마에 해당되는 document들을 find (전부 가져옴)
-  const posts = await Post.find({});
+  const posts = await Post.find({}).populate("author");
   //가져온 데이터를 posts변수에 담아 json 형태로 응답합니다.
   res.json(posts);
 });
@@ -85,9 +89,9 @@ router.get("/:shortId/find", async (req, res, next) => {
 
 router.post("/:shortId/update", async (req, res, next) => {
   let { shortId } = req.params; // view/static/js/postUpdate의 ajax요청의 url요청의 success res를 받아 동작
-  let { title, content } = req.body;
+  let { title, content, email } = req.body;
 
-  console.log(shortId, title, content); //콘솔로 update 변경내용 확인하기
+  console.log(shortId, title, content, email); //콘솔로 update 변경내용 확인하기
 
   try {
     await Post.updateOne(
@@ -106,6 +110,5 @@ router.post("/:shortId/update", async (req, res, next) => {
     next(e);
   }
 });
-
 
 module.exports = router;

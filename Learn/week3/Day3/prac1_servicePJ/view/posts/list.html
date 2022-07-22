@@ -20,15 +20,15 @@
 <body>
     <div class="container">
         <section>
-            <button type="button" onclick="location.href='/view/posts/edit.html'" class="btn btn-outline-dark">New
+            <button type="button" onclick="location.href='/view/posts/edit.html'" class="post-btn btn btn-outline-dark">New
                 Post</button>
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">title</th>
-                        <th scope="col">name</th>
-                        <th scope="col">delete & update</th>
+                        <th scope="col"></th>
+                        <th scope="col">제목</th>
+                        <th scope="col">내용</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody class="postsList">
@@ -51,5 +51,11 @@
 <!-- mine file -->
 <script src="./../static/js/header.js"></script>
 <script src="./../static/js/postsList.js"></script>
-
+<style>
+    .post-btn {
+        margin-top: 5em;
+        margin-bottom: 1em;
+    }
+</style>
+<style type="text/css" href="../static/css/style.css"></style>
 </html>
