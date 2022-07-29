@@ -57,13 +57,14 @@ router.post(
 
     //DB의 User모델의 컬렉션에서, email을 식별자로 일치하는 document 찾아 받기
     const checkEmail = await User.findOne({ email });
-    if (checkEmail.status !== null || checkEmail.status !== undefined) {
-      if (checkEmail.status == true) {
-        console.log(
-          "비밀번호 초기화 했던 이력이 있으니, 비밀번호만 재설정하는 페이지로 Redirect"
-        );
-      }
-    }
+    // if (checkEmail.status !== null || checkEmail.status !== undefined) {
+    //   if (checkEmail.status == true) {
+    //     console.log(
+    //       "비밀번호 초기화 했던 이력이 있으니, 비밀번호만 재설정하는 페이지로 Redirect"
+    //     );
+    //   }
+    // }
+
     //email 가입 유효성 검사
     if (!checkEmail) {
       res.status(401); // 응답으로 반환할 status 설정 : 401에러(접근불가/인증실패)

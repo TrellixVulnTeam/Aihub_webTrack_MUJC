@@ -1,6 +1,8 @@
 import reviewData from "../data/review.json";
+import { useNavigate } from "react-router-dom";
 
 const Review = () => {
+  const navigate = useNavigate();
   return (
     <main>
       <section className="py-5 text-center container">
@@ -13,7 +15,12 @@ const Review = () => {
               또한 삭제, 수정이 가능합니다.
             </p>
             <p>
-              <button className="btn btn-primary my-2 m-1">
+              <button
+                className="btn btn-primary my-2 m-1"
+                onClick={() => {
+                  navigate("/review/create");
+                }}
+              >
                 CREATE REVIEW
               </button>
             </p>

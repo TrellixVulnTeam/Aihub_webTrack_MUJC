@@ -91,8 +91,9 @@ const Login = () => {
       )}
       {view.signUp ? (
         <SignUpForm
+          setSignUpData={setSignUpData}
           signUpData={signUpData}
-          onChangeSingUpData={onChangeSignUpData}
+          onChangeSignUpData={onChangeSignUpData}
         />
       ) : (
         <></>

@@ -1,4 +1,16 @@
+import { useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
+  const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
+
+  useEffect(() => {
+    if (cookies.userData === undefined) {
+      navigate("/");
+    }
+  }, [cookies]);
+
   return (
     <header>
       <div className="collapse bg-dark" id="navbarHeader">
@@ -12,36 +24,65 @@ const Header = () => {
               <ul className="list-unstyled ">
                 <li>
                   <a href="#" className="text-white">
-                    Follow on Twitter
+                    Follow my github
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-white">
-                    Like on Facebook
+                    Like my blog
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-white">
-                    Email me
+                    Contact me on email
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white">Info</h4>
-              <ul className="list-unstyled">
-                <li>
-                  <button
-                    className="btn btn-outline-light"
-                    style={{ marginBottom: "3%" }}
-                  >
-                    LOGOUT
-                  </button>
-                </li>
-                <li>
-                  <button className="btn btn-outline-light">INFO</button>
-                </li>
-              </ul>
+              <h5 className="text-white">내 정보</h5>
+              {cookies.userData ? (
+                <ul className="list-unstyled d-flex">
+                  <li>
+                    <button
+                      onClick={() => {
+                        removeCookie("userData", { path: "/" });
+                        navigate("/");
+                      }}
+                      className="btn btn-outline-light"
+                      style={{ marginBottom: "3%" }}
+                    >
+                      로그아웃
+                    </button>
+                  </li>
+                  <li>
+                    <button className="btn btn-outline-light">
+                      마이페이지
+                    </button>
+                  </li>
+                </ul>
+              ) : (
+                <ul className="list-unstyled d-flex">
+                  <li>
+                    <button
+                      onClick={() => {
+                        navigate("/");
+                      }}
+                      className="btn btn-outline-secondary"
+                    >
+                      로그인
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => navigate("/")}
+                      className="btn btn-outline-secondary"
+                    >
+                      마이페이지
+                    </button>
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
         </div>
