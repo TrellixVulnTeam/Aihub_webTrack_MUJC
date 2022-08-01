@@ -4,7 +4,7 @@ import Login from "./Login";
 import Review from "./Review";
 import ReviewCreate from "./ReviewCreate";
 import ReviewUpdate from "./ReviewUpdate";
-import ReviewDetail from "./ReviewDetail";
+import ReviewDetail from "./ReviewMoreInfo";
 
 export {
   Footer,

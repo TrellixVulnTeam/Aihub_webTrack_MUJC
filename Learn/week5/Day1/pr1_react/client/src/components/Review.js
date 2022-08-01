@@ -5,32 +5,86 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import backUrl from "../data/port.json";
 import { useCookies } from "react-cookie";
+import Detailed from "./Review/Detailed";
+import ControlReview from "./Review/ControlReview";
+//Redux--
+import { useDispatch } from "react-redux"; //setData 사용을 위한 필수요소
+import { setData } from "./../app/reducer/Data";
+import "../components/Zoom.css";
+
 const Review = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [cookies, setCookie, removeCookie] = useCookies(["userData"]);
   const [reviewData, setReviewData] = useState([]);
 
   useEffect(() => {
+    console.log(cookies.userData);
+    if (cookies === undefined) {
+      navigate("/");
+    }
     getReviewData(); //리뷰 데이터 가져오기
   }, []); // 최초 1회 렌더링 시에만 동작
 
   const getReviewData = () => {
-    axios
-      .get(backUrl.url + "/posts", {
-        headers: {
-          // axios 요청으로 인증을 위해 함께 보낼 accessToken이 담긴 헤더 작성
-          accessToken: cookies.userData.accessToken,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        setReviewData(res.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    try {
+      axios
+        .get(backUrl.url + "/posts", {
+          headers: {
+            // axios 요청으로 인증을 위해 함께 보낼 accessToken이 담긴 헤더 작성
+            accessToken: cookies.userData.accessToken,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          setReviewData(res.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } catch (e) {
+      navigate("/");
+    }
   };
+
+  // ------------삭제-----------
+  const deleteReview = async (shortId) => {
+    return await axios.get(backUrl.url + `/posts/${shortId}/delete`, {
+      headers: {
+        accessToken: cookies.userData.accessToken,
+      },
+    });
+  };
+  const onClickDeleteButton = (shortId) => {
+    if (window.confirm("삭제 하시겠습니까?")) {
+      console.log(shortId);
+      deleteReview(shortId)
+        .then((res) => {
+          let getNewDataAfterDelete = reviewData.filter(
+            (item) => item.shortId !== shortId
+          );
+          setReviewData(getNewDataAfterDelete);
+        })
+        .catch((e) => {});
+    } else {
+      //아니오
+      return;
+    }
+  };
+  //---------------------------
+  //--------------Update-------
+  const onClickUpdateButton = (shortId) => {
+    // console.log(shortId);
+    dispatch(setData(shortId));
+    navigate(`/review/${shortId}/update`);
+  };
+  //----------------------------
+  //--------------상세 더보기(MoreInfo)----
+  const onClickMoreInfoButton = (shortId) => {
+    navigate(`/review/${shortId}/detail`);
+  };
+
   return (
     <main>
       <section className="py-5 text-center container">
@@ -60,10 +114,16 @@ const Review = () => {
             {reviewData.map((item, index) => (
               <div className="col" key={index}>
                 <div className="card shadow-sm">
-                  <div className="card-img-top" style={{ textAlign: "center" }}>
+                  <div
+                    className="card-img-top zoom"
+                    style={{ textAlign: "center" }}
+                  >
                     <img
+                      onClick={() => {
+                        onClickMoreInfoButton(item.shortId);
+                      }}
                       src={item.img}
-                      className="bd-placeholder-img mt-4"
+                      className="bd-placeholder-img mt-4 mb-4"
                       width="50%"
                       height="250"
                       role="img"
@@ -74,29 +134,31 @@ const Review = () => {
                   </div>
 
                   <div className="card-body">
+                    <h5
+                      className="card-title"
+                      onClick={() => {
+                        onClickMoreInfoButton(item.shortId);
+                      }}
+                    >
+                      {item.title}
+                    </h5>
                     <p className="card-text">
-                      {item.content.substring(0, item.content.length / 2)}
-                      &nbsp;&nbsp;&nbsp;
-                      <a style={{ color: "#5d90ef" }}>...상세보기</a>
+                      <Detailed
+                        item={item}
+                        onClickMoreInfoBtn={onClickMoreInfoButton}
+                      />
                     </p>
                     <div className="d-flex justify-content-between align-items-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-secondary"
-                        >
-                          View
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-secondary"
-                        >
-                          Edit
-                        </button>
-                      </div>
+                      <ControlReview
+                        onClickUpBtn={onClickUpdateButton}
+                        onClickDelBtn={onClickDeleteButton}
+                        onClickMoreInfoBtn={onClickMoreInfoButton}
+                        curUserData={cookies.userData}
+                        item={item}
+                      />
                       <div>
                         <small className="text-muted m-3">
-                          {item.author.name}
+                          {item.author?.name}
                         </small>
                         <small className="text-muted ">9 mins</small>
                       </div>

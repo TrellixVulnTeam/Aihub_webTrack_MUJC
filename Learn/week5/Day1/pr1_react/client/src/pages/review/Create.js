@@ -14,7 +14,7 @@ const Create = () => {
     img: "",
     title: "",
     content: "",
-    email: cookies.userData.email,
+    email: cookies.userData.email, // adderEmail로 바꾸면 500에러뜸
   });
 
   const onClickCreateReviewButton = () => {
@@ -43,13 +43,13 @@ const Create = () => {
         navigate("/review/list");
       })
       .catch((e) => {
-        console.log(e);
+        console.log(e, "에바입니다.");
       });
   };
 
   //서버에 요청 로직 (백엔드와 소통 == 비동기: async/await은 프로미스의 응용 -> 호출부에서 then/catch로 후속처리 로직)
   const sendCreateReview = async () => {
-    return await axios.post(backUrl.img + "/posts", createReview, {
+    return await axios.post(backUrl.url + "/posts", createReview, {
       headers: {
         //axios의 헤더 작성법
         accessToken: cookies.userData.accessToken,
@@ -58,8 +58,12 @@ const Create = () => {
   };
 
   const onClickBackPage = () => {
-    // window.confirm("직전 페이지로 이동하시겠습니까?");
-    navigate("/review/list");
+    if (window.confirm("직전 페이지로 이동하시겠습니까?")) {
+      window.history.back();
+    } else {
+      //아니오
+      return;
+    }
   };
 
   useEffect(() => {
@@ -85,10 +89,11 @@ const Create = () => {
           style={{ marginBottom: "10em", textAlign: "center" }}
         >
           <div className="card-img-top">
-            <img
-              src="https://movie-phinf.pstatic.net/20201229_146/1609226288425JgdsP_JPEG/movie_image.jpg?type=m203_290_2"
-              alt="..."
-            />
+            {createReview.img !== "" ? (
+              <img src={createReview.img} alt="movie img" />
+            ) : (
+              <></>
+            )}
           </div>
           <div className="card-body">
             <h5 className="card-title mb-3">카드 제목</h5>

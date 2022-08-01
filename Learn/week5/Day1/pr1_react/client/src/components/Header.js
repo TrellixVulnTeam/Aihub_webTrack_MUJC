@@ -41,8 +41,16 @@ const Header = () => {
             </div>
             <div>
               <h5 className="text-white">내 정보</h5>
+              <span style={{ color: "grey", fontSize: 16 }}>
+                {cookies.userData.name}
+              </span>
               {cookies.userData ? (
-                <ul className="list-unstyled d-flex">
+                <ul className="list-unstyled d-flex mt-3">
+                  <li>
+                    <button className="btn btn-outline-light">
+                      마이페이지
+                    </button>
+                  </li>
                   <li>
                     <button
                       onClick={() => {
@@ -53,11 +61,6 @@ const Header = () => {
                       style={{ marginBottom: "3%" }}
                     >
                       로그아웃
-                    </button>
-                  </li>
-                  <li>
-                    <button className="btn btn-outline-light">
-                      마이페이지
                     </button>
                   </li>
                 </ul>
@@ -89,7 +92,10 @@ const Header = () => {
       </div>
       <div className="navbar navbar-dark bg-dark shadow-sm border-top">
         <div className="container">
-          <a href="#" className="navbar-brand d-flex align-items-center">
+          <a
+            href="/review/list"
+            className="navbar-brand d-flex align-items-center"
+          >
             <strong>Movie Review</strong>
           </a>
           <button

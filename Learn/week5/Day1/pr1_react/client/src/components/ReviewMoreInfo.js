@@ -1,6 +1,6 @@
-import Detail from "../pages/review/Detail";
+import MoreInfo from "../pages/review/MoreInfo";
 
-const ReviewDetail = () => {
+const ReviewMoreInfo = () => {
   return (
     <main>
       <section className="py-5 text-center container">
@@ -14,8 +14,8 @@ const ReviewDetail = () => {
           </div>
         </div>
       </section>
-      <Detail />
+      <MoreInfo />
     </main>
   );
 };
-export default ReviewDetail;
+export default ReviewMoreInfo;

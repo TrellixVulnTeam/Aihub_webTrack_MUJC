@@ -20,6 +20,7 @@ router.post("/", async (req, res, next) => {
       content,
       img,
       author: authData,
+      email: email,
     });
 
     //에러가 나지 않고 정상적으로 저장이 되면
