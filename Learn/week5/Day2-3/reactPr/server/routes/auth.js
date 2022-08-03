@@ -3,12 +3,13 @@ const router = Router();
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const { User } = require("./../models");
-const jwtConfig = require("./../config/jwtConfig");
+const keyInfo = require("../config/keyInfo");
+const jwtConfig = require("../config/jwtConfig");
 
 router.get("/kakao", async (req, res, next) => {
   const REDIRECT_URI = "http://localhost:3000/oauth/kakao/callback";
   const KAKAO_CODE = req.query.code;
-  const REST_API_KEY = "b2a1edc6a033d6739600842701c18188";
+  const REST_API_KEY = keyInfo.restApi_kakao;
   //   console.log(KAKAO_CODE);
 
   try {

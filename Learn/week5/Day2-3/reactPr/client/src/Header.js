@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import kakaLoginButtonImg from "./img/kakao_login_medium.png";
-import REST_API_KEY from "./data/keyInfo/kakaoAppKey"; // 카카오소셜연동.(1)
-// import APPKEY from "../../kakaoAppKey";
+import keyInfo from "../src/data/keyInfo"; // 카카오소셜연동.(1)
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ const Header = () => {
   //----------------- kakao oauth-----------------------------------
 
   const REDIRECT_URI = "http://localhost:3000/oauth/kakao/callback";
-
+  const REST_API_KEY = keyInfo.restApi_kakao;
   const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
   //------------------------------------------------------------------------
 

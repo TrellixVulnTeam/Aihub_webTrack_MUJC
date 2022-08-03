@@ -1,6 +1,6 @@
-kakaoAppKey.js
+keyInfo.js
 
-/keyInfo
+keyInfo.md
 
 /config
 jwtConfig.js
