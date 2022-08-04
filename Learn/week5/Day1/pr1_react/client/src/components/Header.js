@@ -42,7 +42,7 @@ const Header = () => {
             <div>
               <h5 className="text-white">내 정보</h5>
               <span style={{ color: "grey", fontSize: 16 }}>
-                {cookies.userData.name}
+                {cookies.userData?.name}
               </span>
               {cookies.userData ? (
                 <ul className="list-unstyled d-flex mt-3">
